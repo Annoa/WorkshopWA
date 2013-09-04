@@ -23,12 +23,12 @@
             <link rel="stylesheet" type="text/css" href="resources/css/style.css" />
         </head>
         <body>
-            <jsp:directive.include file="WEB-INF/jsp/header.jspx" />
-            <jsp:directive.include file="WEB-INF/jsp/mainMenu.jspx"/>
-            <section>
+            <jsp:directive.include file="../header.jspx" />
+            <jsp:directive.include file="../mainMenu.jspx"/>
+            <section id="pageSection">
                 <p>This is the entry to other parts of the application</p>
             </section>
-            <jsp:directive.include file="WEB-INF/jsp/footer.jspx" />
+            <jsp:directive.include file="../footer.jspx" />
         </body>
     </html>
 
