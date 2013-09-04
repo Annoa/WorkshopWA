@@ -4,3 +4,6 @@
 *.jar
 *.war
 *.ear
+/WorkshopProject/nbproject/private/
+/WorkshopProject/WorkshopProject-war/nbproject/private/
+/WorkshopProject/WorkshopProject-ejb/nbproject/private/
