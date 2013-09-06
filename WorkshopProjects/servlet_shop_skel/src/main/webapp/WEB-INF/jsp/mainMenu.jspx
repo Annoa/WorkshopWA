@@ -1,7 +1,7 @@
 <nav class="menu">
     <ul>
         <li><a href="index.jspx">Home</a></li>
-        <li><a href="router.jspx?view=products">Products</a></li>    
+        <li><a href="products?view=this">Products</a></li>    
         <li><a href="router.jspx?view=customers">Customers</a></li>
         <li><a href="router.jspx?view=orders">Orders</a></li>
     </ul>

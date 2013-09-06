@@ -4,17 +4,24 @@
  */
 package edu.chl.hajo.sshop;
 
+import edu.chl.hajo.shop.core.IProductCatalogue;
+import edu.chl.hajo.shop.core.ProductCatalogue;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashSet;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author anno
  */
+@WebServlet(name = "ProductServlet",
+        urlPatterns = {"/products/*"})
 public class ProductServlet extends HttpServlet {
 
     /**
@@ -29,22 +36,26 @@ public class ProductServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet ProductServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet ProductServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {            
-            out.close();
+        HttpSession session = request.getSession(true);
+        session.setAttribute("container", new ContainerNavigator(0, 3, Shop.INSTANCE.getProductCatalogue()));
+
+        String view = request.getParameter("view");
+        ContainerNavigator temp = (ContainerNavigator) session.getAttribute("container");
+        // View handling
+        if (view != null) {
+            switch (view) {
+                case "next":
+                    session.setAttribute("container", temp.next());
+                    break;
+                case "prev":
+                    session.setAttribute("container", temp.previous());
+                    break;
+            }
         }
+
+        request.setAttribute("PRODUCT_LIST", temp.getRange());
+
+        request.getRequestDispatcher("/WEB-INF/jsp/products/products.jspx").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
