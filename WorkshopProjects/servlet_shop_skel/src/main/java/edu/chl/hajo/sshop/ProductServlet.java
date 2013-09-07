@@ -37,21 +37,24 @@ public class ProductServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession(true);
-        session.setAttribute("container", new ContainerNavigator(0, 3, Shop.INSTANCE.getProductCatalogue()));
-
+        if (session.getAttribute("container") == null) {
+            session.setAttribute("container", new ContainerNavigator(0, 2, Shop.INSTANCE.getProductCatalogue()));
+        }
+        
         String view = request.getParameter("view");
         ContainerNavigator temp = (ContainerNavigator) session.getAttribute("container");
         // View handling
         if (view != null) {
             switch (view) {
                 case "next":
-                    session.setAttribute("container", temp.next());
+                    session.setAttribute("PRODUCT_LIST", temp.next());
                     break;
                 case "prev":
-                    session.setAttribute("container", temp.previous());
+                    session.setAttribute("PRODUCT_LIST", temp.previous());
                     break;
             }
         }
+        
 
         request.setAttribute("PRODUCT_LIST", temp.getRange());
 

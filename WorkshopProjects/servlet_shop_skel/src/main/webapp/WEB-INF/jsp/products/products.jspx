@@ -26,9 +26,7 @@
             <jsp:directive.include file="../header.jspx" />
             <jsp:directive.include file="../mainMenu.jspx"/>
             <section id="pageSection">
-                <p>This is products!</p>
-                <a href="products?view=prev">Prev</a><p> </p><a href="products?view=next">Next</a>
-                
+                <a href="products?view=prev">Prev</a><a href="products?view=next">Next</a>
                 <table border="solid">
                     <tr><td>Id</td><td>Name</td><td>Price</td></tr>
                     <c:forEach var="products" items="${requestScope.PRODUCT_LIST}">
