@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- 
-    Document   : products
-    Created on : Sep 4, 2013, 2:49:57 PM
-    Author     : anno
+    Document   : editProducts
+    Created on : Sep 9, 2013, 10:40:56 AM
+    Author     : Gabriel
 -->
 <jsp:root 
     xmlns:jsp="http://java.sun.com/JSP/Page"
@@ -17,7 +17,7 @@
 
     <html>
         <head>
-            <title>Products</title> 
+            <title>EditProducts</title> 
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
             <link rel="stylesheet" type="text/css" href="resources/css/layout.css" />
             <link rel="stylesheet" type="text/css" href="resources/css/style.css" />
@@ -25,22 +25,8 @@
         <body>
             <jsp:directive.include file="../header.jspx" />
             <jsp:directive.include file="../mainMenu.jspx"/>
-            <a href="products?view=add">Add</a>
-            <br></br>             
             <section id="pageSection">
-                <a href="products?view=prev">Prev</a><a href="products?view=next">Next</a>
-                <table border="solid">
-                    <tr><td>Id</td><td>Name</td><td>Price</td></tr>
-                    <c:forEach var="products" items="${requestScope.PRODUCT_LIST}">
-                        <tr>
-                            <td>${products.getId()}</td>
-                            <td>${products.getName()}</td>
-                            <td>${products.getPrice()}</td>
-                            <td><a href="products?view=edit">Edit</a></td>
-                            <td><a href="products?view=del">Delete</a></td>
-                        </tr>
-                    </c:forEach>
-                </table>
+                <p>You're inside the edit page.</p>
             </section>
             <jsp:directive.include file="../footer.jspx" />
         </body>

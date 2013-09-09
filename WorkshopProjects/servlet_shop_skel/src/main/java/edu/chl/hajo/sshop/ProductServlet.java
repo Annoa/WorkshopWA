@@ -4,11 +4,8 @@
  */
 package edu.chl.hajo.sshop;
 
-import edu.chl.hajo.shop.core.IProductCatalogue;
-import edu.chl.hajo.shop.core.ProductCatalogue;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.HashSet;
+import javax.persistence.metamodel.SetAttribute;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -52,6 +49,16 @@ public class ProductServlet extends HttpServlet {
                 case "prev":
                     session.setAttribute("PRODUCT_LIST", temp.previous());
                     break;
+                case "del":
+                        //session.SetAttribute("PRODUCT_LIST", temp.getRange())
+                        //TODO: find a way to find object from pID. 
+                    break;
+                case "edit":
+                    request.getRequestDispatcher("/WEB-INF/jsp/products/editProducts.jspx").forward(request, response);
+                    return;
+                case "add":
+                    request.getRequestDispatcher("/WEB-INF/jsp/products/addProduct.jspx").forward(request, response);
+                    return;    
             }
         }
         

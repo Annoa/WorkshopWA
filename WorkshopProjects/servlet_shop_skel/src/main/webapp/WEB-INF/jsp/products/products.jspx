@@ -25,6 +25,8 @@
         <body>
             <jsp:directive.include file="../header.jspx" />
             <jsp:directive.include file="../mainMenu.jspx"/>
+            <a href="products?view=add">Add</a>
+            <br></br>             
             <section id="pageSection">
                 <a href="products?view=prev">Prev</a><a href="products?view=next">Next</a>
                 <table border="solid">
@@ -34,8 +36,8 @@
                             <td>${products.getId()}</td>
                             <td>${products.getName()}</td>
                             <td>${products.getPrice()}</td>
-                            <td><a href="">Edit</a></td>
-                            <td><a href="">Delete</a></td>
+                            <td><a href="products?view=edit">Edit</a></td>
+                            <td><a href="products?view=del">Delete</a></td>
                         </tr>
                     </c:forEach>
                 </table>
