@@ -82,6 +82,8 @@ public class ProductServlet extends HttpServlet {
                             request.getParameter("name"), 
                             Double.parseDouble(request.getParameter("price"))
                             ));
+                    response.sendRedirect("/servlet_shop/products");
+                    return;
             }
         }
         request.setAttribute("PRODUCT_LIST", temp.getRange());
