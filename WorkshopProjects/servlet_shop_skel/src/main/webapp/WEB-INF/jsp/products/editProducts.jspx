@@ -30,12 +30,12 @@
                     <fieldset>
                         <legend>Product</legend>
                         <p>
-                            <input type="hidden" name="uid" value="${PRODUCT.getId()}"/>
+                            <input type="hidden" name="id" value="${PRODUCT.getId()}"/>
                             <label>Name (string)</label>
                             <!-- Must set value for required XML? -->
-                            <input type="text" name="uname" required="required" value="${PRODUCT.getName()}" />
+                            <input type="text" name="name" required="required" value="${PRODUCT.getName()}" />
                             <label>Price (double)</label>
-                            <input type="text" name="uprice" required="required" value="${PRODUCT.getPrice()}"/>
+                            <input type="text" name="price" required="required" value="${PRODUCT.getPrice()}"/>
                             <br/>
                         </p>
                         <p>

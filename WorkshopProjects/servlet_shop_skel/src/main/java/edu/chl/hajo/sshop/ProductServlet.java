@@ -72,11 +72,16 @@ public class ProductServlet extends HttpServlet {
                         return;
                     }
                 case "update":
-                    String a = request.getParameter("uid");
-                    String b = request.getParameter("uname");
-                    String c = request.getParameter("uprice");
+                    String a = request.getParameter("id");
+                    String b = request.getParameter("name");
+                    String c = request.getParameter("price");
                     Product product = new Product(Long.parseLong(a), b, Double.parseDouble(c));
                     Shop.INSTANCE.getProductCatalogue().update(product);
+                case "add":
+                    Shop.INSTANCE.getProductCatalogue().add(new Product(
+                            request.getParameter("name"), 
+                            Double.parseDouble(request.getParameter("price"))
+                            ));
             }
         }
         request.setAttribute("PRODUCT_LIST", temp.getRange());

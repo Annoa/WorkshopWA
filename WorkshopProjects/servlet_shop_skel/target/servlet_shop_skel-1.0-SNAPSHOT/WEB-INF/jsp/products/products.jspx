@@ -25,7 +25,7 @@
         <body>
             <jsp:directive.include file="../header.jspx" />
             <jsp:directive.include file="../mainMenu.jspx"/>
-            <a href="products?view=add">Add</a>
+            <jsp:directive.include file="../products/subMenu.jspx"/>
             <br></br>             
             <section id="pageSection">
                 <a href="products?view=prev">Prev</a><a href="products?view=next">Next</a>
