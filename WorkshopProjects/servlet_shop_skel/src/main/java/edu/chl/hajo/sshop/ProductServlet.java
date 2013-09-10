@@ -72,11 +72,12 @@ public class ProductServlet extends HttpServlet {
                         return;
                     }
                 case "update":
-                    String a = request.getParameter("id");
-                    String b = request.getParameter("name");
-                    String c = request.getParameter("price");
-                    Product product = new Product(Long.parseLong(a), b, Double.parseDouble(c));
+                    long pId=  Long.parseLong(request.getParameter("id"));
+                    String name = request.getParameter("name");
+                    double price = Double.parseDouble(request.getParameter("price"));
+                    Product product = new Product(pId, name, price);
                     Shop.INSTANCE.getProductCatalogue().update(product);
+                    break;
                 case "add":
                     Shop.INSTANCE.getProductCatalogue().add(new Product(
                             request.getParameter("name"), 

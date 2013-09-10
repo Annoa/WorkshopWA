@@ -25,6 +25,7 @@
         <body>
             <jsp:directive.include file="../header.jspx" />
             <jsp:directive.include file="../mainMenu.jspx"/>
+            <jsp:directive.include file="../products/subMenu.jspx"/>
             <section id="pageSection">
                 <form action="products?action=update" method="POST">
                     <fieldset>
