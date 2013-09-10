@@ -4,6 +4,7 @@
  */
 package edu.chl.hajo.sshop;
 
+import edu.chl.hajo.shop.core.Product;
 import java.io.IOException;
 import javax.persistence.metamodel.SetAttribute;
 import javax.servlet.ServletException;
@@ -37,8 +38,10 @@ public class ProductServlet extends HttpServlet {
         if (session.getAttribute("container") == null) {
             session.setAttribute("container", new ContainerNavigator(0, 2, Shop.INSTANCE.getProductCatalogue()));
         }
-        
+
         String view = request.getParameter("view");
+        String action = request.getParameter("action");
+        String id = request.getParameter("id");
         ContainerNavigator temp = (ContainerNavigator) session.getAttribute("container");
         // View handling
         if (view != null) {
@@ -49,20 +52,33 @@ public class ProductServlet extends HttpServlet {
                 case "prev":
                     session.setAttribute("PRODUCT_LIST", temp.previous());
                     break;
-                case "del":
-                        //session.SetAttribute("PRODUCT_LIST", temp.getRange())
-                        //TODO: find a way to find object from pID. 
-                    break;
-                case "edit":
-                    request.getRequestDispatcher("/WEB-INF/jsp/products/editProducts.jspx").forward(request, response);
-                    return;
                 case "add":
                     request.getRequestDispatcher("/WEB-INF/jsp/products/addProduct.jspx").forward(request, response);
-                    return;    
+                    return;
             }
         }
-        
-
+        if (action != null) {
+            switch (action) {
+                case "remove":
+                    if (id != null) {
+                        Long k = Long.parseLong(id);
+                        Shop.INSTANCE.getProductCatalogue().remove(k);
+                    }
+                    break;
+                case "edit":
+                    if (id != null) {
+                        session.setAttribute("PRODUCT", Shop.INSTANCE.getProductCatalogue().find(Long.parseLong(id)));
+                        request.getRequestDispatcher("/WEB-INF/jsp/products/editProducts.jspx").forward(request, response);
+                        return;
+                    }
+                case "update":
+                    String a = request.getParameter("uid");
+                    String b = request.getParameter("uname");
+                    String c = request.getParameter("uprice");
+                    Product product = new Product(Long.parseLong(a), b, Double.parseDouble(c));
+                    Shop.INSTANCE.getProductCatalogue().update(product);
+            }
+        }
         request.setAttribute("PRODUCT_LIST", temp.getRange());
 
         request.getRequestDispatcher("/WEB-INF/jsp/products/products.jspx").forward(request, response);
