@@ -40,8 +40,8 @@
                             <br/>
                         </p>
                         <p>
-                            <button type="reset">Reset</button>
-                            <button type="submit">Edit Product</button>
+                            <button type="reset" value="Reset">Reset</button>
+                            <button type="submit" value="Submit">Edit Product</button>
                         </p>
                     </fieldset>
                 </form> 

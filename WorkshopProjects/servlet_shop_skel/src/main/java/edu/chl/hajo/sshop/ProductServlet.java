@@ -36,7 +36,7 @@ public class ProductServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession(true);
         if (session.getAttribute("container") == null) {
-            session.setAttribute("container", new ContainerNavigator(0, 2, Shop.INSTANCE.getProductCatalogue()));
+            session.setAttribute("container", new ContainerNavigator(0, 3, Shop.INSTANCE.getProductCatalogue()));
         }
 
         String view = request.getParameter("view");
@@ -64,7 +64,8 @@ public class ProductServlet extends HttpServlet {
                         Long k = Long.parseLong(id);
                         Shop.INSTANCE.getProductCatalogue().remove(k);
                     }
-                    break;
+                    response.sendRedirect("/servlet_shop/products");
+                    return;
                 case "edit":
                     if (id != null) {
                         session.setAttribute("PRODUCT", Shop.INSTANCE.getProductCatalogue().find(Long.parseLong(id)));
@@ -77,7 +78,8 @@ public class ProductServlet extends HttpServlet {
                     double price = Double.parseDouble(request.getParameter("price"));
                     Product product = new Product(pId, name, price);
                     Shop.INSTANCE.getProductCatalogue().update(product);
-                    break;
+                    response.sendRedirect("/servlet_shop/products");
+                    return;
                 case "add":
                     Shop.INSTANCE.getProductCatalogue().add(new Product(
                             request.getParameter("name"), 
