@@ -6,6 +6,7 @@ package edu.chl.hajo.wss;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -25,6 +26,8 @@ public final class PrimitiveJSONWrapper<T> {
     PrimitiveJSONWrapper(T value){
         this.value = value;
     }
+    
+    @XmlElement(required = true)
     public T getValue(){
         return value;
     }

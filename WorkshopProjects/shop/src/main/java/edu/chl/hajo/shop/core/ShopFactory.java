@@ -23,7 +23,7 @@ public class ShopFactory {
     private static void initTestData(Shop shop) {
 
         // Add new data
-        shop.getProductCatalogue().add(new Product("banana", 11.11));
+        shop.getProductCatalogue().add(new Product(Long.parseLong("1"), "banana", 11.11));
         shop.getProductCatalogue().add(new Product("apple", 22.22));
         shop.getProductCatalogue().add(new Product("pear", 33.33));
         shop.getProductCatalogue().add(new Product("pineapple", 44.44));

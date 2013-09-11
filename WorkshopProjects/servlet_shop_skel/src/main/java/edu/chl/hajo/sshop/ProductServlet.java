@@ -6,7 +6,6 @@ package edu.chl.hajo.sshop;
 
 import edu.chl.hajo.shop.core.Product;
 import java.io.IOException;
-import javax.persistence.metamodel.SetAttribute;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
