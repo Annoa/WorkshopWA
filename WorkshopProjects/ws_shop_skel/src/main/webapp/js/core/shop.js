@@ -4,7 +4,7 @@
 // Global
 var shop = (function(){
     
-    var baseUri = "http://localhost:8080/ws_shop/rs/";  
+    var baseUri = "http://localhost:8080/ws_shop_skel/rs/";  
     var products = new ProductCatalogue(baseUri + "products");
     //var orderBook = new OrderBook(baseUri);
     // etc ...

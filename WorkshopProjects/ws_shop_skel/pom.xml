@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>edu.chl.hajo</groupId>
-    <artifactId>ws_shop_skel</artifactId>
+    <artifactId>ws_shop_skel_skel</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
@@ -100,5 +100,5 @@
             </plugin>
         </plugins>
     </build>
-    <name>ws_shop_skel</name>
+    <name>ws_shop_skel_skel</name>
 </project>
