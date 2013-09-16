@@ -74,7 +74,7 @@ public class ProductCatalogueResource {
     
     @GET @Path("/count")
     public Response count() {
-        PrimitiveJSONWrapper p = new PrimitiveJSONWrapper(productCatalogue.getCount());
+        PrimitiveJSONWrapper<Integer> p = new PrimitiveJSONWrapper<>(productCatalogue.getCount());
         return Response.ok(p).build();  
     }
     

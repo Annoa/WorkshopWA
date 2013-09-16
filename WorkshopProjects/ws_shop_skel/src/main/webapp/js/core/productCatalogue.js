@@ -24,9 +24,9 @@ ProductCatalogue.prototype = (function () {
         return $.getJSON(me.bUri + "/"+ id);
      },
      
-     getRange : function(first, max) {
+     getRange : function(fst, max) {
         var me = this;
-        return $.getJSON(me.bUri + "/range", {fst: first, max: max});
+        return $.getJSON(me.bUri + "/range", {fst: fst, max: max});
      },
              
      getCount : function() {
