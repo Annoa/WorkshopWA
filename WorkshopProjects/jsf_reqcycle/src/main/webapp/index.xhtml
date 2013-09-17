@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html >
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>index.html</title>
+    </h:head>
+    <h:body> 
+        <h1>Tracing the JSF request cycle</h1>
+        <p> This uses CDI beans i.e. no JSF Managed beans (check imports) <br/>
+        See web.xml for a note on HTML-comments vs Facelets comments.<br/>
+        Inspect GlassFish output window directly after start.</p>
+        <p> Enter some data click ok or Cancel and watch GlassFish output (also possible
+            use HttpMonitor).</p>
+
+        <!---
+        THIS IS KIND OF STANDARD USE 
+        -->
+        <h:form>
+            <h:inputText value="#{MyBean.data}" valueChangeListener="#{MyListener.valueChanged}" >
+                <!-- Could use Bean validation (annotation on bean attributes) for this -->
+                <f:converter converterId="myConverter"/>
+                <f:validator validatorId="myValidator"/>
+            </h:inputText>
+            <h:commandButton value="OK" actionListener="#{MyListener.buttonClicked}" action="#{MyListener.navigate}" />
+            <!-- immediate will short circuit the request cycle 
+                one usage: avoiding validation errors if text field has bad data
+            -->
+            <h:commandButton value="Cancel"  immediate="true"  />
+        </h:form>
+        <hr/>
+        <!-- USING AJAX (Must use Chrome Developer tools or Http Request monitor to trace)-->
+
+        <p> Inspect GlassFish window for output of parameter to listener method <br/>
+        Check Chrome developer tools or HttpMonotor to trace AJAX request</p>
+        <h:form>
+            <h:inputText id="input" value="#{MyBean.data}"/>
+            <h:commandButton value="OK (AJAX)" actionListener="#{MyListener.buttonClickedUsingParam('*** HELLO ***')}">
+                     <f:ajax execute="input" render="output" />
+                </h:commandButton>
+                <h:commandButton value="Cancel"  immediate="true"  />
+                <h:outputText id="output" value="Output is : #{MyBean.data}" />
+        </h:form>
+        <hr/>
+
+        <!-- USING GET CALLS -->
+        <p>Using GET request and view parameters </p>
+        <h:link outcome="other_get" value="Issuing a GET request (see address field)"  >
+            <f:param name="reqData" value="99999"/>
+        </h:link><br/>
+
+        <!-- See other_viewparams.xhtml. 
+            Also possible just to type in address field like this
+        http://localhost:8080/request_cycle/faces/other_viewparams.xhtml?reqData=888888
+        -->
+        <h:link outcome="other_viewparams" value="Issuing a GET with viewdata (see address field)" >
+            <f:param name="reqData" value="888888"   />
+        </h:link>
+
+    </h:body>
+</html>
+
