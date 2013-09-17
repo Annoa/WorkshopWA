@@ -8,7 +8,6 @@
  */
 // Run after DOM constructed (same as $(document).ready())
 $(function() {
-
     var nav = new Navigator(shop.getProductCatalogue());
     nav.refresh(createTable, function() {
         createErrorDialog("Can't list!!").dialog("open");
@@ -43,13 +42,11 @@ $(function() {
         createAddDialog().dialog("open");
     });
 
-
     $("#products").click(function(e) {
         var prod = shop.getProductCatalogue().find(e.target.parentNode.cells[0].innerText);
         prod.done(function(product) {
             createEditDeleteDialog(product).dialog("open");
         });
-//        createEditDeleteDialog(prod).dialog("open");
     });
 
     /**********************************************
@@ -58,12 +55,11 @@ $(function() {
      */
     function createTable(products) {
         // Use JQuery and HTML
-        $("#products tbody").contents().remove();
+        $("#products").contents().remove();
         $(products).each(function() {
-            var me = this;
-            $("#products tbody").append("<tr><td>" + me.id
-                    + "</td><td>" + me.name
-                    + "</td><td>" + me.price
+            $("#products").append("<tr><td>" + this.id
+                    + "</td><td>" + this.name
+                    + "</td><td>" + this.price
                     + "</td></tr>");
         });
     }
@@ -71,8 +67,6 @@ $(function() {
     function createAddDialog() {
         var ret = $("#dialog-form").dialog({
             autoOpen: false,
-//        height: 300,
-//        width: 350,
             modal: true,
             buttons: {
                 Save: function() {
@@ -103,7 +97,7 @@ $(function() {
 
     // Possible to both edit and delet from same dialog
     function createEditDeleteDialog(product) {
-        $("#dialog-form").dialog({
+        var ret = $("#dialog-form").dialog({
             autoOpen: false,
 //        height: 300,
 //        width: 350,
@@ -132,16 +126,11 @@ $(function() {
                 },
                 Delete: function() {
                     createConfirmDeleteDialog(product.id).dialog("open");
-//                    nav.refresh(createTable, fail);
-//                    function fail() {
-//                        createErrorDialog("Can't list!!").dialog("open");
-//                    }
-                    
                 }
             }
         });
         setFormDialogData(product);
-        return $("#dialog-form");
+        return ret;
     }
 
     // If delete in above dialog, have to confirm.
