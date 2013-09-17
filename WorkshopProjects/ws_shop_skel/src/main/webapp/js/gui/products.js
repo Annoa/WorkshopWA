@@ -92,6 +92,7 @@ $(function() {
                 }
             }
         });
+        $('#dialog-form').dialog('option', 'title', 'Add New Product');
         return ret;
     }
 
@@ -129,6 +130,7 @@ $(function() {
                 }
             }
         });
+        $('#dialog-form').dialog('option', 'title', 'Edit or Delete Product');
         setFormDialogData(product);
         return ret;
     }
