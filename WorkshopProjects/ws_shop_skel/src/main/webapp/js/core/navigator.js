@@ -15,6 +15,16 @@ Navigator.prototype = (function() {
 
     // Public API
     return {
+        refresh: function(success, fail) {
+            // Must save this, will change inside $.when()
+            var me = this;
+            me.container.getCount().then(function(result) {
+                var m = (me.fst + me.max > result.value) ? result.value - me.fst : me.max;
+                return m;
+            }, fail).then(function(m) {
+                me.container.getRange(me.fst, m).then(success, fail);
+            });
+        },
         next: function(success, fail) {
             // Must save this, will change inside $.when()
             var me = this;

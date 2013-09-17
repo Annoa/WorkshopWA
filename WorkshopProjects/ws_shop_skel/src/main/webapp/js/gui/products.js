@@ -10,6 +10,9 @@
 $(function() {
 
     var nav = new Navigator(shop.getProductCatalogue());
+    nav.refresh(createTable, function() {
+        createErrorDialog("Can't list!!").dialog("open");
+    });
     /*************************************
      * 
      * Components (from JQueryUI) and eventhandling
@@ -19,13 +22,17 @@ $(function() {
             .click(function() {
         nav.next(createTable, fail);
         function fail() {
-            createErrorDialog("Can't list!!").dialog("open")
+            createErrorDialog("Can't list!!").dialog("open");
         }
     });
 
     $("#prev-button")
             .button()
             .click(function() {
+        nav.prev(createTable, fail);
+        function fail() {
+            createErrorDialog("Can't list!!").dialog("open");
+        }
 
     });
 
@@ -33,9 +40,17 @@ $(function() {
     $("#add-product")
             .button()
             .click(function() {
-
+        createAddDialog().dialog("open");
     });
 
+
+    $("#products").click(function(e) {
+        var prod = shop.getProductCatalogue().find(e.target.parentNode.cells[0].innerText);
+        prod.done(function(product) {
+            createEditDeleteDialog(product).dialog("open");
+        });
+//        createEditDeleteDialog(prod).dialog("open");
+    });
 
     /**********************************************
      *   
@@ -43,24 +58,121 @@ $(function() {
      */
     function createTable(products) {
         // Use JQuery and HTML
+        $("#products tbody").contents().remove();
+        $(products).each(function() {
+            var me = this;
+            $("#products tbody").append("<tr><td>" + me.id
+                    + "</td><td>" + me.name
+                    + "</td><td>" + me.price
+                    + "</td></tr>");
+        });
     }
 
     function createAddDialog() {
-        // Use JQueryUI dialog
+        var ret = $("#dialog-form").dialog({
+            autoOpen: false,
+//        height: 300,
+//        width: 350,
+            modal: true,
+            buttons: {
+                Save: function() {
+                    var prod = getFormDialogData();
+                    if (!validate(prod)) {
+                        createErrorDialog("Wrong input!").dialog("open");
+                    }
+                    else {
+                        shop.getProductCatalogue().add(prod.name, prod.price);
+                        nav.refresh(createTable, fail);
+                        function fail() {
+                            createErrorDialog("Can't list!!").dialog("open");
+                        }
+                        clearValidationErrors();
+                        clearFormDialogData();
+                        $(this).dialog("close");
+                    }
+                },
+                Cancel: function() {
+                    clearValidationErrors();
+                    clearFormDialogData();
+                    $(this).dialog("close");
+                }
+            }
+        });
+        return ret;
     }
 
     // Possible to both edit and delet from same dialog
     function createEditDeleteDialog(product) {
-
+        $("#dialog-form").dialog({
+            autoOpen: false,
+//        height: 300,
+//        width: 350,
+            modal: true,
+            buttons: {
+                Save: function() {
+                    var prod = getFormDialogData();
+                    if (!validate(prod)) {
+                        createErrorDialog("Wrong input!").dialog("open");
+                    }
+                    else {
+                        shop.getProductCatalogue().update(prod.id, prod.id, prod.name, prod.price);
+                        nav.refresh(createTable, fail);
+                        function fail() {
+                            createErrorDialog("Can't list!!").dialog("open");
+                        }
+                        clearValidationErrors();
+                        clearFormDialogData();
+                        $(this).dialog("close");
+                    }
+                },
+                Cancel: function() {
+                    clearValidationErrors();
+                    clearFormDialogData();
+                    $(this).dialog("close");
+                },
+                Delete: function() {
+                    createConfirmDeleteDialog(product.id).dialog("open");
+//                    nav.refresh(createTable, fail);
+//                    function fail() {
+//                        createErrorDialog("Can't list!!").dialog("open");
+//                    }
+                    
+                }
+            }
+        });
+        setFormDialogData(product);
+        return $("#dialog-form");
     }
 
     // If delete in above dialog, have to confirm.
     function createConfirmDeleteDialog(id) {
-         // Use JQueryUI dialog
+        // Use JQueryUI dialog
+        $("#dialog-message").dialog({
+            autoOpen: false,
+            modal: true,
+            stack: true,
+            buttons: {
+                Ok: function() {
+                    shop.getProductCatalogue().delete(id);
+                    nav.refresh(createTable, fail);
+                    function fail() {
+                        createErrorDialog("Can't list!!").dialog("open");
+                    }
+                    $(this).dialog("close");
+                    $("#dialog-form").dialog("close");
+                },
+                Cancel: function() {
+                    $(this).dialog("close");
+                }
+            }
+        });
+        $('#dialog-message').dialog('option', 'title', 'WARNING!');
+        $("#dialog-message #msg").text("Are you sure you want to delete product with id: " + id);
+        return $('#dialog-message');
     }
 
     function createErrorDialog(message) {
-         // Using JQueryUI dialog
+        // Using JQueryUI dialog
         $("#dialog-message").dialog({
             autoOpen: false,
             modal: true,
@@ -74,7 +186,7 @@ $(function() {
                 }
             }
         });
-        $('#dialog-message').dialog('option', 'title', 'Something went! wrong');
+        $('#dialog-message').dialog('option', 'title', 'Something went wrong!');
         $("#dialog-message #msg").text(message);
         return $('#dialog-message');
     }
