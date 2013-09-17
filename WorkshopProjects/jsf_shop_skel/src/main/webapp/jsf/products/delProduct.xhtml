@@ -10,21 +10,21 @@
         <ui:composition template="/WEB-INF/template.xhtml">
 
             <ui:define name="content">
-                <h3>Edit product</h3>
+                <h3>Delete product</h3>
                 <h:form>
                     <h:panelGrid columns="3">
                         <h:outputText value="Id" />
-                        <h:inputText id="id" value="#{editProduct.id}" disabled="true"/>
+                        <h:inputText id="id" value="#{delProduct.id}" disabled="true"/>
                         <h:message for="id" />
                         <h:outputText value="Name" />
-                        <h:inputText id="name"  value="#{editProduct.name}"/>
+                        <h:inputText id="name"  value="#{delProduct.name}"/>
                         <h:message for="name" />
                         <h:outputText value="Price" />
-                        <h:inputText id="price" value="#{editProduct.price}"/>
+                        <h:inputText id="price" value="#{delProduct.price}"/>
                         <h:message for="price" />
                     </h:panelGrid>
                     <h:button outcome="products" value="Cancel"/>                   
-                    <h:commandButton action="#{editProduct.update}"  value="Update" />
+                    <h:commandButton action="#{delProduct.delete}"  value="Delete" />
                 </h:form>
             </ui:define>
         </ui:composition>
