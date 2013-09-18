@@ -42,7 +42,12 @@ $(function() {
         createAddDialog().dialog("open");
     });
 
+<<<<<<< HEAD
     $("#products").click(function(e) {
+=======
+
+    $("#products tbody").click(function(e) {
+>>>>>>> Mhmhm
         var prod = shop.getProductCatalogue().find(e.target.parentNode.cells[0].innerText);
         prod.done(function(product) {
             createEditDeleteDialog(product).dialog("open");
@@ -145,6 +150,7 @@ $(function() {
             buttons: {
                 Ok: function() {
                     shop.getProductCatalogue().delete(id);
+                    clearFormDialogData();
                     nav.refresh(createTable, fail);
                     function fail() {
                         createErrorDialog("Can't list!!").dialog("open");

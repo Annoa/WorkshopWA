@@ -19,6 +19,7 @@ Navigator.prototype = (function() {
             // Must save this, will change inside $.when()
             var me = this;
             me.container.getCount().then(function(result) {
+                // Move fst pointer if it is larger than result
                 var m = (me.fst + me.max > result.value) ? result.value - me.fst : me.max;
                 return m;
             }, fail).then(function(m) {
