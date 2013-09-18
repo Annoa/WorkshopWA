@@ -17,14 +17,14 @@
                         <h:inputText id="id" value="#{delProduct.id}" disabled="true"/>
                         <h:message for="id" />
                         <h:outputText value="Name" />
-                        <h:inputText id="name"  value="#{delProduct.name}"/>
+                        <h:inputText id="name"  value="#{delProduct.name}" disabled="true"/>
                         <h:message for="name" />
                         <h:outputText value="Price" />
-                        <h:inputText id="price" value="#{delProduct.price}"/>
+                        <h:inputText id="price" value="#{delProduct.price}" disabled="true"/>
                         <h:message for="price" />
                     </h:panelGrid>
                     <h:button outcome="products" value="Cancel"/>                   
-                    <h:commandButton action="#{delProduct.delete}"  value="Delete" />
+                    <h:commandButton action="#{delProduct.actOnSelected}"  value="Delete" />
                 </h:form>
             </ui:define>
         </ui:composition>
