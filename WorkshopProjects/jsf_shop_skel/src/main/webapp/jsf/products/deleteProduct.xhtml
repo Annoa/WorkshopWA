@@ -10,21 +10,22 @@
         <ui:composition template="/WEB-INF/template.xhtml">
 
             <ui:define name="content">
-                <h3>Add product</h3>
+                <h3>Delete product</h3>
                 <h:form>
                     <h:panelGrid columns="3">
                         <h:outputText value="Id" />
-                        <h:inputText id="id" value="Set by database" disabled="true"/>
+                        <!-- TODO Add a bunch of things to make ID set at beginning -->
+                        <h:inputText id="id" value="#{deleteProduct.id}" disabled="true"/>
                         <h:message for="id" />
                         <h:outputText value="Name" />
-                        <h:inputText id="name" value="#{addProduct.name}" required="true"/>
+                        <h:inputText id="name" value="#{deleteProduct.name}" disabled="true"/>
                         <h:message for="name" />
                         <h:outputText value="Price" />
-                        <h:inputText id="price" value="#{addProduct.price}" required="true"/>
+                        <h:inputText id="price" value="#{deleteProduct.price}" disabled="true"/>
                         <h:message for="price" />
                     </h:panelGrid>
                     <h:button outcome="products" value="Cancel"/>                   
-                    <h:commandButton action="#{addProduct.save}" value="Save" />
+                    <h:commandButton action="#{deleteProduct.actOnSelected}" value="Delete" />
                 </h:form>
             </ui:define>
         </ui:composition>

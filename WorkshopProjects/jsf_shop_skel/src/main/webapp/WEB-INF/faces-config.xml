@@ -36,7 +36,22 @@
             <from-outcome>add</from-outcome>
             <to-view-id>/jsf/products/addProduct.xhtml</to-view-id>
         </navigation-case>
-    </navigation-rule> 
+        <navigation-case>
+            <from-outcome>edit</from-outcome>
+            <to-view-id>/jsf/products/editProduct.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>del</from-outcome>
+            <to-view-id>/jsf/products/deleteProduct.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/jsf/products/addProduct.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>PRODUCT_SUCCESS</from-outcome>
+            <to-view-id>/jsf/products/products.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
     <!-- Login -->
     <navigation-rule>
         <from-view-id>/jsf/login.xhtml</from-view-id>

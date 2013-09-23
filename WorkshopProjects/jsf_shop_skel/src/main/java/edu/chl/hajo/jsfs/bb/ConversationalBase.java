@@ -48,7 +48,7 @@ public abstract class ConversationalBase implements Serializable {
             conversation.end();
         }
         execute();
-        return "";
+        return "products"; //Navigation.PRODUCT_SUCCESS.toString();
     }
 
     // Implemented by subclasses
