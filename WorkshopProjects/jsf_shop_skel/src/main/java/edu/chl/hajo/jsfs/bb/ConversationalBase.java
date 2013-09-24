@@ -1,6 +1,7 @@
 package edu.chl.hajo.jsfs.bb;
 
-import edu.chl.hajo.jsfs.mb.Shop;
+import edu.chl.hajo.jsfs.mb.ShopBean;
+import edu.chl.hajo.jsfs.mb.ShopBean;
 import edu.chl.hajo.shop.core.IProductCatalogue;
 import edu.chl.hajo.shop.core.Product;
 import java.io.Serializable;
@@ -9,17 +10,28 @@ import java.util.logging.Logger;
 import javax.annotation.PreDestroy;
 import javax.enterprise.context.Conversation;
 import javax.inject.Inject;
+import javax.validation.constraints.DecimalMax;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 /**
- * Common code for delete and edit (which uses conversational scope) 
+ * Common code for delete and edit (which uses conversational scope)
+ *
  * @author hajo
  */
 public abstract class ConversationalBase implements Serializable {
 
     private Long id;
+    
+    @NotNull(message="{common.notEmpty}")
+    @Pattern(regexp="[a-zA_Z0-9]{4,20}", message="{product.name}")
     private String name;
+    @NotNull(message = "{common.notEmpty}")
+    @DecimalMax(value = "100000", message = "{product.price}")
+    @DecimalMin(value = "0", message = "{product.price}")
     private String price;
-    private Shop shop = Shop.INSTANCE;
+    private ShopBean shop = ShopBean.getInstance();
     @Inject
     private Conversation conversation;
 

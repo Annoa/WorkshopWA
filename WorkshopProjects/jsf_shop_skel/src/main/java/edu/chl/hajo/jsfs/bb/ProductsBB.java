@@ -4,7 +4,8 @@
  */
 package edu.chl.hajo.jsfs.bb;
 
-import edu.chl.hajo.jsfs.mb.Shop;
+import edu.chl.hajo.jsfs.mb.ShopBean;
+import edu.chl.hajo.jsfs.mb.ShopBean;
 import edu.chl.hajo.jsfs.utils.ContainerNavigator;
 import edu.chl.hajo.shop.core.LongIdComparator;
 
@@ -24,7 +25,7 @@ import javax.inject.Named;
 public class ProductsBB implements Serializable{
 
     private ContainerNavigator cn;
-    private Shop shop = Shop.INSTANCE;
+    private ShopBean shop = ShopBean.getInstance();
 
     @PostConstruct
     public void post() {

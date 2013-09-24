@@ -14,13 +14,11 @@ import javax.inject.Named;
  */
 @Named("editProduct")
 @ConversationScoped
-public class EditProductBB extends ConversationalBase{
+public class EditProductBB extends ConversationalBase {
 
     @Override
     protected void execute() {
         Product p = new Product(this.getId(), this.getName(), Double.parseDouble(this.getPrice()));
         getProductCatalogue().update(p);
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
 }
