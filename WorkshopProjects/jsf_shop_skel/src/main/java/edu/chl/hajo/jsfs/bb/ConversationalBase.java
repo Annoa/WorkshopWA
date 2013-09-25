@@ -12,6 +12,7 @@ import javax.enterprise.context.Conversation;
 import javax.inject.Inject;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
@@ -23,21 +24,21 @@ import javax.validation.constraints.Pattern;
 public abstract class ConversationalBase implements Serializable {
 
     private Long id;
-    
-    @NotNull(message="{common.notEmpty}")
-    @Pattern(regexp="[a-zA_Z0-9]{4,20}", message="{product.name}")
+    @NotNull(message = "{common.notEmpty}")
+    @Pattern(regexp = "[a-zA_Z0-9]{4,20}", message = "{product.name}")
     private String name;
     @NotNull(message = "{common.notEmpty}")
     @DecimalMax(value = "100000", message = "{product.price}")
     @DecimalMin(value = "0", message = "{product.price}")
+    @Digits(integer = 6, fraction = 2, message = "{product.price}")
     private String price;
     private ShopBean shop;// = ShopBean.getInstance();
     @Inject
     private Conversation conversation;
 
     @Inject
-    public void initMB(){
-         shop = ShopBean.getInstance();
+    public void initMB() {
+        shop = ShopBean.getInstance();
     }
 
     // Must have String???

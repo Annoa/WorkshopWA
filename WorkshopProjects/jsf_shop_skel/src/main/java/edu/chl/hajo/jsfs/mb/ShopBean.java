@@ -6,7 +6,7 @@ package edu.chl.hajo.jsfs.mb;
 
 import edu.chl.hajo.shop.core.IProductCatalogue;
 import edu.chl.hajo.shop.core.IShop;
-import edu.chl.hajo.shop.core.ShopFactory;i
+import edu.chl.hajo.shop.core.ShopFactory;
 import javax.inject.Singleton;
 
 /**

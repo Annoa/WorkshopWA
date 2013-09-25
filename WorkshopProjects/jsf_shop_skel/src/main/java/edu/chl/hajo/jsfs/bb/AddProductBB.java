@@ -13,6 +13,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
 
 /**
  *
@@ -29,6 +30,7 @@ public class AddProductBB {
     @NotNull(message="{common.notEmpty}")
     @DecimalMax(value="100000", message="{product.price}")
     @DecimalMin(value="0", message="{product.price}")
+    @Digits(integer=6, fraction=2, message="{product.price}")
     private String price;
     
     
