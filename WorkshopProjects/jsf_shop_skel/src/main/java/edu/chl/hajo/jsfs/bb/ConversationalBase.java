@@ -31,9 +31,14 @@ public abstract class ConversationalBase implements Serializable {
     @DecimalMax(value = "100000", message = "{product.price}")
     @DecimalMin(value = "0", message = "{product.price}")
     private String price;
-    private ShopBean shop = ShopBean.getInstance();
+    private ShopBean shop;// = ShopBean.getInstance();
     @Inject
     private Conversation conversation;
+
+    @Inject
+    public void initMB(){
+         shop = ShopBean.getInstance();
+    }
 
     // Must have String???
     public void setSelected(String id) {

@@ -14,6 +14,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
@@ -25,14 +26,20 @@ import javax.inject.Named;
 public class ProductsBB implements Serializable{
 
     private ContainerNavigator cn;
-    private ShopBean shop = ShopBean.getInstance();
+    private ShopBean shop;// = ShopBean.getInstance();
 
     @PostConstruct
     public void post() {
         // We know all injection are done so shop not null (hopefully)
         cn = new ContainerNavigator(0, 3, shop.getProductCatalogue());
     }
+    
+    @Inject
+    public void initMB(){
+         shop = ShopBean.getInstance();
+    }
 
+    
     public List<Product> getRange() {
         // For now later database
         shop.getProductCatalogue().sort( new LongIdComparator<Product>());

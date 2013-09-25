@@ -19,7 +19,6 @@ import javax.inject.Singleton;
 public class ShopBean {
     
     private Shop shop;
-    @Inject
     private static ShopBean instance;
     
     private ShopBean(){
