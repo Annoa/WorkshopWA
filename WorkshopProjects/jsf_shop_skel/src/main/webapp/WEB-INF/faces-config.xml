@@ -36,6 +36,7 @@
     <!-- Product pages -->
     <navigation-rule>
         <from-view-id>/jsf/products/products.xhtml</from-view-id>
+        
         <navigation-case>
             <from-outcome>add</from-outcome>
             <to-view-id>/jsf/products/addProduct.xhtml</to-view-id>
@@ -52,10 +53,30 @@
     <!-- Edit and Delete pages-->
     <navigation-rule>
         <from-view-id>/jsf/products/*</from-view-id>
+     
+
+        <navigation-case>
+            <from-outcome>home</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>PRODUCT_SUCCESS</from-outcome>
+            <to-view-id>/jsf/products/products.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>customers</from-outcome>
+            <to-view-id>/jsf/customers/customers.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>orders</from-outcome>
+            <to-view-id>/jsf/orders/orders.xhtml</to-view-id>
+        </navigation-case>
+
         <navigation-case>
             <from-outcome></from-outcome>
             <to-view-id>/jsf/products/products.xhtml</to-view-id>
         </navigation-case>
+        
     </navigation-rule>
     <!-- Login -->
     <navigation-rule>

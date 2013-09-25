@@ -24,7 +24,7 @@ import javax.validation.constraints.Digits;
 public class AddProductBB {
     
     @NotNull(message="{common.notEmpty}")
-    @Pattern(regexp="[a-zA_Z0-9]{4,20}", message="{product.name}")
+    @Pattern(regexp="[a-zA-Z0-9]{4,20}", message="{product.name}")
     private String name;
     
     @NotNull(message="{common.notEmpty}")
