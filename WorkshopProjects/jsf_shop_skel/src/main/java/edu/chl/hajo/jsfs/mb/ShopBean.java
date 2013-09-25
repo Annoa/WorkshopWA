@@ -6,43 +6,39 @@ package edu.chl.hajo.jsfs.mb;
 
 import edu.chl.hajo.shop.core.IProductCatalogue;
 import edu.chl.hajo.shop.core.IShop;
-import edu.chl.hajo.shop.core.ShopFactory;
-import javax.inject.Inject;
+import edu.chl.hajo.shop.core.ShopFactory;i
 import javax.inject.Singleton;
-
 
 /**
  * Wrapper for shop
+ *
  * @author hajo
  */
 @Singleton
 public class ShopBean {
-    
+
     private Shop shop;
     private static ShopBean instance;
-    
-    private ShopBean(){
+
+    private ShopBean() {
         this.shop = Shop.INSTANCE;
     }
-    
-    
-    public static ShopBean getInstance(){
-        if(instance == null)
-           instance = new ShopBean();
+
+    public static ShopBean getInstance() {
+        if (instance == null) {
+            instance = new ShopBean();
+        }
         return instance;
     }
-    
-    
-    public IProductCatalogue getProductCatalogue(){
+
+    public IProductCatalogue getProductCatalogue() {
         return this.shop.getProductCatalogue();
     }
 }
 
+enum Shop {
 
-
-  enum Shop {
     INSTANCE;
-    
     private final IShop s;
 
     private Shop() {
